@@ -35,7 +35,6 @@ android {
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
-    implementation(libs.material.v190)
     implementation(libs.appcompat)
     implementation(libs.picasso)
     implementation(libs.material)

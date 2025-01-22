@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         loadCountries();
 
+        // Botão que chama a tela para adicionar país
         btnAddCountry.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddEditCountryActivity.class);
             startActivity(intent);
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         btnRefreshCountries.setOnClickListener(v -> loadCountries());
     }
 
+
+    // READ - Lê os arquivos do banco
     private void loadCountries() {
         db.collection("countries")
                 .get()
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Erro ao carregar países", Toast.LENGTH_SHORT).show());
     }
 
+    // Atualiza a lista com os país obtidos do banco
     private void updateUI(List<Country> countries) {
         if (countries.isEmpty()) {
             tvPlaceholder.setVisibility(View.VISIBLE);
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Função executada ao clicar em um país da lista
     private void handleCountryClick(Country country) {
         new AlertDialog.Builder(this)
                 .setTitle(String.format("País %s", country.getName()))
@@ -94,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+
+    // DELETE - Aqui estamos deletando um país que está no banco
     private void deleteCountry(Country country) {
         db.collection("countries")
                 .document(country.getId())
@@ -102,9 +109,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "País deletado com sucesso", Toast.LENGTH_SHORT).show();
                     loadCountries(); // Recarregar a lista após exclusão
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(MainActivity.this, "Erro ao deletar o país", Toast.LENGTH_SHORT).show()
-                );
+                .addOnFailureListener(e -> {
+                    Toast.makeText(MainActivity.this, "Erro ao deletar o país", Toast.LENGTH_SHORT).show();
+                    loadCountries(); // Recarregar a lista após tentativa falha de deletar o país
+                });
     }
 
     @Override

@@ -32,8 +32,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     // Atualizar a lista de países
     public void setCountries(List<Country> newCountries) {
         this.countryList = newCountries;
-        notifyItemRangeChanged(0, getItemCount());
-//        notifyDataSetChanged(); // Atualiza a lista
+        notifyDataSetChanged(); // Atualiza a lista
     }
 
 

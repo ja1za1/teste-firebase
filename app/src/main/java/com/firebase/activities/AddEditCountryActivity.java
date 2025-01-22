@@ -36,6 +36,7 @@ public class AddEditCountryActivity extends AppCompatActivity {
         etComment = findViewById(R.id.etComment);
         Button btnSave = findViewById(R.id.btnSave);
 
+        // Obtendo a instância do banco de dados
         db = FirebaseFirestore.getInstance();
 
         loadCountriesIntoSpinner();
@@ -74,10 +75,11 @@ public class AddEditCountryActivity extends AppCompatActivity {
         }
 
         if (imageUrl.isBlank()) {
-            Toast.makeText(this, "Por favor, forneça uma URL para imagem", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor, forneça uma URL de uma imagem", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // CREATE - Aqui estamos adicionando um novo país ao banco
         if (country == null) {
             Country newCountry = new Country(name, continent, imageUrl, comment);
             db.collection("countries")
@@ -87,12 +89,15 @@ public class AddEditCountryActivity extends AppCompatActivity {
                         finish(); // Retornar à lista
                     })
                     .addOnFailureListener(e -> Toast.makeText(this, "Erro ao adicionar país", Toast.LENGTH_SHORT).show());
-        } else {
+        }
+        // UPDATE - Aqui estamos atualizando um país que está no banco
+        else {
             country.setName(name);
             country.setContinent(continent);
             country.setImageUrl(imageUrl);
             country.setComment(comment);
 
+            // Adicionar aqui a função de editar do banco
             db.collection("countries").document(country.getId())
                     .set(country)
                     .addOnSuccessListener(aVoid -> {

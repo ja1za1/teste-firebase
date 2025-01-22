@@ -1,7 +1,6 @@
 package com.firebase.activities;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,40 +21,34 @@ public class AddEditCountryActivity extends AppCompatActivity {
 
     private Spinner spinnerCountry, spinnerContinent;
     private EditText etImageUrl, etComment;
-    private Button btnSave;
 
     private FirebaseFirestore db;
-    private Country country; // Objeto Country usado para edição (se aplicável)
+    private Country country; // Objeto Country usado para edição
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_country);
 
-        // Inicializar os elementos da interface
         spinnerCountry = findViewById(R.id.spinnerCountry);
         spinnerContinent = findViewById(R.id.spinnerContinent);
         etImageUrl = findViewById(R.id.etImageUrl);
         etComment = findViewById(R.id.etComment);
-        btnSave = findViewById(R.id.btnSave);
+        Button btnSave = findViewById(R.id.btnSave);
 
-        // Inicializar Firestore
         db = FirebaseFirestore.getInstance();
 
         loadCountriesIntoSpinner();
         loadContinentsIntoSpinner();
 
-        // Verificar se estamos editando um país existente
         country = (Country) getIntent().getSerializableExtra("country");
         if (country != null) {
             populateFields(country);
         }
 
-        // Configurar botão Salvar
         btnSave.setOnClickListener(v -> saveCountry());
     }
 
-    // Preencher os campos no modo de edição
     private void populateFields(Country country) {
         Log.d("PAIS", country.toString());
         selectContinentInSpinner(country.getContinent());
@@ -64,7 +57,6 @@ public class AddEditCountryActivity extends AppCompatActivity {
         etComment.setText(country.getComment());
     }
 
-    // Salvar ou atualizar país no Firestore
     private void saveCountry() {
         String name = spinnerCountry.getSelectedItem().toString();
         String continent = spinnerContinent.getSelectedItem().toString();
@@ -87,7 +79,6 @@ public class AddEditCountryActivity extends AppCompatActivity {
         }
 
         if (country == null) {
-            // Adicionar um novo país
             Country newCountry = new Country(name, continent, imageUrl, comment);
             db.collection("countries")
                     .add(newCountry)
@@ -97,7 +88,6 @@ public class AddEditCountryActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> Toast.makeText(this, "Erro ao adicionar país", Toast.LENGTH_SHORT).show());
         } else {
-            // Atualizar um país existente
             country.setName(name);
             country.setContinent(continent);
             country.setImageUrl(imageUrl);
@@ -114,7 +104,6 @@ public class AddEditCountryActivity extends AppCompatActivity {
     }
 
     private void loadCountriesIntoSpinner() {
-        // Lista de países (pode ser carregada de um recurso ou API externa)
         List<String> countries = Arrays.asList(
                 "Selecione um país",
                 "Afeganistão", "África do Sul", "Alemanha", "Brasil", "Canadá", "China",
@@ -124,7 +113,7 @@ public class AddEditCountryActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCountry.setAdapter(adapter);
 
-//        spinnerCountry.setSelection(0);
+        spinnerCountry.setSelection(0);
     }
 
     private void loadContinentsIntoSpinner() {
@@ -136,7 +125,7 @@ public class AddEditCountryActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerContinent.setAdapter(adapter);
 
-//        spinnerCountry.setSelection(0);
+        spinnerCountry.setSelection(0);
     }
 
     private void selectCountryInSpinner(String countryName) {

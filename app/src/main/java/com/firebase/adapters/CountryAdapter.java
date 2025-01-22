@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryViewHolder> {
     private List<Country> countryList;
-    private OnCountryClickListener listener;
+    private final OnCountryClickListener listener;
 
     public interface OnCountryClickListener {
         void onCountryClick(Country country);
@@ -32,7 +32,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     // Atualizar a lista de países
     public void setCountries(List<Country> newCountries) {
         this.countryList = newCountries;
-        notifyDataSetChanged(); // Atualiza a lista
+        notifyItemRangeChanged(0, getItemCount());
+//        notifyDataSetChanged(); // Atualiza a lista
     }
 
 
@@ -56,8 +57,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     }
 
     public static class CountryViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName, tvContinent, tvComment;
-        private ImageView ivCountry;
+        private final TextView tvName;
+        private final TextView tvContinent;
+        private final TextView tvComment;
+        private final ImageView ivCountry;
 
         public CountryViewHolder(@NonNull View itemView) {
             super(itemView);

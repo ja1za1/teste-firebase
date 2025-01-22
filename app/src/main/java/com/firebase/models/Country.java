@@ -1,13 +1,15 @@
 package com.firebase.models;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Country implements Serializable {
-    private String id;          // ID do documento no Firestore
-    private String name;        // Nome do país
-    private String continent;   // Continente do país
-    private String imageUrl;    // URL da imagem do país
-    private String comment;     // Comentário (opcional)
+    private String id;
+    private String name;
+    private String continent;
+    private String imageUrl;
+    private String comment;
 
     public Country() {
     }
@@ -59,6 +61,7 @@ public class Country implements Serializable {
         this.comment = comment;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Country{" +

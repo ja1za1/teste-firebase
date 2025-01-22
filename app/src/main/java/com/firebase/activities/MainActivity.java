@@ -51,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btnRefreshCountries.setOnClickListener(v -> {
-            loadCountries();
-        });
+        btnRefreshCountries.setOnClickListener(v -> loadCountries());
     }
 
     private void loadCountries() {
@@ -83,21 +81,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleCountryClick(Country country) {
-        // Criar um AlertDialog para as opções
         new AlertDialog.Builder(this)
                 .setTitle(String.format("País %s", country.getName()))
                 .setMessage("O que você deseja fazer com o país selecionado?")
                 .setPositiveButton("Editar", (dialog, which) -> {
-                    // Navegar para a tela de edição com os dados do país
                     Intent intent = new Intent(MainActivity.this, AddEditCountryActivity.class);
                     intent.putExtra("country", country);
                     startActivity(intent);
                 })
-                .setNegativeButton("Deletar", (dialog, which) -> {
-                    // Confirmar a exclusão do país
-                    deleteCountry(country);
-                })
-                .setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss()) // Fechar o popup
+                .setNegativeButton("Deletar", (dialog, which) -> deleteCountry(country))
+                .setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
@@ -117,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Recarregar países ao retornar para a tela inicial
         loadCountries();
     }
 }

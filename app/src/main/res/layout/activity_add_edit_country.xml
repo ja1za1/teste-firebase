@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".activities.AddEditCountryActivity">
+
+    <Spinner
+        android:id="@+id/spinnerContinent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:hint="@string/select_a_continent" />
+
+    <Spinner
+        android:id="@+id/spinnerCountry"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/select_a_country" />
+
+
+    <EditText
+        android:id="@+id/etImageUrl"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/image_url"
+        android:inputType="textUri" />
+
+    <EditText
+        android:id="@+id/etComment"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/optional_comment"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/save" />
+</LinearLayout>

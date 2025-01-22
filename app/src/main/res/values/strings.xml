@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Firebase</string>
+    <string name="main_title">Países que quero viajar</string>
+    <string name="reload">Recarregar</string>
+    <string name="no_country_found">Nenhum país encontrado</string>
+    <string name="add_country">Adicionar País</string>
+    <string name="country_image">Imagem de um país</string>
+    <string name="select_a_continent">Selecione um continente</string>
+    <string name="select_a_country">Selecione um país</string>
+    <string name="image_url">URL da imagem</string>
+    <string name="optional_comment">Comentário (opcional)</string>
+    <string name="save">Salvar</string>
+</resources>

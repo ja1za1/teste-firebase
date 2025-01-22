@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Título da tela -->
+
+    <ImageButton
+        android:id="@+id/btnRefreshCountries"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="11dp"
+        android:contentDescription="@string/reload"
+        android:src="@android:drawable/ic_menu_rotate" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        android:layout_centerHorizontal="true" />
+
+    <!-- RecyclerView para exibir os países -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCountries"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="8dp"
+        android:padding="8dp" />
+
+    <!-- Placeholder para exibir quando não há países -->
+    <TextView
+        android:id="@+id/tvPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_country_found"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <!-- Botão para adicionar países -->
+    <ImageButton
+        android:id="@+id/btnAddCountry"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/add_country"
+        android:src="@android:drawable/ic_input_add" />
+</RelativeLayout>
